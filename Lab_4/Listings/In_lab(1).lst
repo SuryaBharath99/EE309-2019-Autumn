@@ -1,0 +1,156 @@
+A51 MACRO ASSEMBLER  IN_LAB_1_                                                            09/09/2019 14:03:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+NO OBJECT MODULE REQUESTED
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE In_lab(1).asm SET(SMALL) DEBUG PRINT(.\Listings\In_lab(1).lst) OBJECT(.
+                      \Objects\In_lab(1).obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+                       2             
+0000 02009A            3     ljmp main
+                       4     
+                       5     
+                       6     
+                       7     
+0050                   8     org 50H
+                       9             
+0050                  10     delay:
+0050 7B05             11                     mov R3,#5;
+                      12        
+0052                  13                     back3 :
+0052 7AC4             14                               mov R2,#196
+0054                  15                               BACK1 :
+0054 79FF             16                                         MOV R1,#0FFH
+0056                  17                                         BACK :
+0056 D9FE             18                                                  DJNZ R1,BACK
+0058 DAFA             19                                         DJNZ R2, BACK1
+                      20                             
+005A 7C0C             21                               mov R4,#12;   
+005C                  22                               back4 :
+005C 7EC4             23                                             mov R6,#196
+005E                  24                                             BACK5 :
+005E 7FFF             25                                                       MOV R7,#0FFH
+0060                  26                                               BACK6 :
+0060 DFFE             27                                                        DJNZ R7,BACK6
+0062 DEFA             28                                                       DJNZ R6, BACK5
+0064 DCF6             29                                         DJNZ R4, back4
+0066 DBEA             30                               DJNZ R3, back3
+0068 22               31     ret     
+                      32             
+0069                  33     readNibble:
+0069 75900F           34     mov P1, #0Fh; First configure P1.3-P1.0 as input
+                      35     
+006C 7590FF           36     mov P1,#0ffh; Set pins P1.7-P1.4(LEDs) (indication that routine is ready to accept input)
+                      37     
+                      38     ;lcall delay
+                      39     ;lcall delay
+                      40     ;lcall delay
+006F 120050           41     lcall delay; wait for 5 sec during which user can give input
+0072 C297             42     clr p1.7
+0074 C296             43     clr p1.6
+0076 C295             44     clr p1.5
+0078 C294             45     clr p1.4; Clear pins P1.7-P1.4
+007A 120050           46     lcall delay; wait for one sec
+007D A690             47     mov @r0,p1
+007F E590             48     mov a,p1;
+                      49     ; read the input on P1.3-P1.0 (nibble)
+0081 75F010           50     mov b,#16
+                      51     
+0084 A4               52     MUL AB
+0085 240F             53     add a,#0FH;
+                      54     
+0087 F590             55     mov p1,a
+                      56     
+                      57     
+A51 MACRO ASSEMBLER  IN_LAB_1_                                                            09/09/2019 14:03:04 PAGE     2
+
+                      58     
+                      59     
+                      60     ;lcall delay
+                      61     ;lcall delay
+                      62     ;lcall delay
+0089 120050           63     lcall delay; show the read value on pins P1.7-P1.4(LEDs)
+                      64     ;wait for 5 sec
+                      65     
+                      66     ;The following code is to verify that the user input is right
+008C C297             67     clr p1.7
+008E C296             68     clr p1.6
+0090 C295             69     clr p1.5
+0092 C294             70     clr p1.4
+0094 E590             71     mov a,p1; USER sets all switches if I/P is verified. (0FH )
+0096 B40FD0           72     cjne a,#0Fh,readNibble; Follow the above-mentioned procedure to accept a nibble
+                      73     ; If the nibble reads 0FH, USER input is verified.
+                      74     ; Else, User has to input the nibble again.
+0099 22               75     RET
+                      76     
+                      77     
+                      78     
+                      79     
+                      80     
+                      81     
+009A                  82     main:
+                      83     
+009A 7850             84     mov r0,#50H
+009C 1169             85     call readNibble
+009E 08               86     inc r0;
+009F 1169             87     call readNibble
+00A1 08               88     inc r0;
+00A2 1169             89     call readNibble
+00A4 08               90     inc r0;
+00A5 1169             91     call readNibble
+00A7                  92     mov a,
+*** _________________________^
+*** ______________________________^
+*** ERROR #A38 IN 92 (In_lab(1).asm, LINE 92): NUMBER OF OPERANDS DOES NOT MATCH INSTRUCTION
+*** ERROR #A9 IN 92 (In_lab(1).asm, LINE 92): SYNTAX ERROR
+                      93     
+                      94     
+00A7 F4               95     cpl a
+00A8 04               96     inc a
+                      97     
+00A9 F8               98     mov r0,a
+                      99     
+00AA F590            100     mov P1,a;
+                     101     
+00AC 120050          102     lcall delay
+00AF 120050          103     lcall delay
+                     104     
+00B2 E8              105     mov a ,r0
+00B3 540F            106     anl a,#0Fh
+00B5 23              107     rl a
+00B6 23              108     rl a
+00B7 23              109     rl a
+00B8 23              110     rl a
+00B9 F590            111     mov P1,a;
+                     112     
+00BB 80FE            113     here: sjmp here
+                     114     end
+A51 MACRO ASSEMBLER  IN_LAB_1_                                                            09/09/2019 14:03:04 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   0056H   A   
+BACK1. . . . . . .  C ADDR   0054H   A   
+BACK3. . . . . . .  C ADDR   0052H   A   
+BACK4. . . . . . .  C ADDR   005CH   A   
+BACK5. . . . . . .  C ADDR   005EH   A   
+BACK6. . . . . . .  C ADDR   0060H   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+HERE . . . . . . .  C ADDR   00BBH   A   
+MAIN . . . . . . .  C ADDR   009AH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+READNIBBLE . . . .  C ADDR   0069H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 2 ERROR(S)

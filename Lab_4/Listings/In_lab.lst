@@ -1,0 +1,172 @@
+A51 MACRO ASSEMBLER  IN_LAB                                                               10/07/2019 12:49:29 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\In_lab.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE In_lab.asm SET(SMALL) DEBUG PRINT(.\Listings\In_lab.lst) OBJECT(.\Objec
+                      ts\In_lab.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+                       2             
+0000 02009C            3     ljmp main
+                       4     
+                       5     
+                       6     
+                       7     
+0050                   8     org 50H
+                       9             
+0050                  10     delay:
+0050 7B05             11                     mov R3,#5;
+                      12        
+0052                  13                     back3 :
+0052 7AC4             14                               mov R2,#196
+0054                  15                               BACK1 :
+0054 79FF             16                                         MOV R1,#0FFH
+0056                  17                                         BACK :
+0056 D9FE             18                                                  DJNZ R1,BACK
+0058 DAFA             19                                         DJNZ R2, BACK1
+                      20                             
+005A 7C0C             21                               mov R4,#12;   
+005C                  22                               back4 :
+005C 7EC4             23                                             mov R6,#196
+005E                  24                                             BACK5 :
+005E 7FFF             25                                                       MOV R7,#0FFH
+0060                  26                                               BACK6 :
+0060 DFFE             27                                                        DJNZ R7,BACK6
+0062 DEFA             28                                                       DJNZ R6, BACK5
+0064 DCF6             29                                         DJNZ R4, back4
+0066 DBEA             30                               DJNZ R3, back3
+0068 22               31     ret     
+                      32             
+0069                  33     readNibble:
+0069 75900F           34     mov P1, #0Fh; First configure P1.3-P1.0 as input
+                      35     
+006C 7590FF           36     mov P1,#0ffh; Set pins P1.7-P1.4(LEDs) (indication that routine is ready to accept input)
+                      37     
+                      38     ;lcall delay
+                      39     ;lcall delay
+                      40     ;lcall delay
+006F 120050           41     lcall delay; wait for 5 sec during which user can give input
+0072 C297             42     clr p1.7
+0074 C296             43     clr p1.6
+0076 C295             44     clr p1.5
+0078 C294             45     clr p1.4; Clear pins P1.7-P1.4
+007A 120050           46     lcall delay; wait for one sec
+                      47     
+007D E590             48     mov a,p1;
+                      49     ; read the input on P1.3-P1.0 (nibble)
+007F 75F010           50     mov b,#16
+                      51     
+0082 A4               52     MUL AB
+0083 240F             53     add a,#0FH;
+0085 AD90             54     mov r5,p1
+0087 F590             55     mov p1,a
+                      56     
+                      57     
+A51 MACRO ASSEMBLER  IN_LAB                                                               10/07/2019 12:49:29 PAGE     2
+
+                      58     
+                      59     
+                      60     ;lcall delay
+                      61     ;lcall delay
+                      62     ;lcall delay
+0089 120050           63     lcall delay; show the read value on pins P1.7-P1.4(LEDs)
+                      64     ;wait for 5 sec
+                      65     
+                      66     ;The following code is to verify that the user input is right
+008C C297             67     clr p1.7
+008E C296             68     clr p1.6
+0090 C295             69     clr p1.5
+0092 C294             70     clr p1.4
+0094 E590             71     mov a,p1; USER sets all switches if I/P is verified. (0FH )
+0096 B40FD0           72     cjne a,#0Fh,readNibble; Follow the above-mentioned procedure to accept a nibble
+                      73     ; If the nibble reads 0FH, USER input is verified.
+                      74     ; Else, User has to input the nibble again.
+0099 ED               75     mov a,r5
+009A F6               76     mov @r0,a
+009B 22               77     RET
+                      78     
+                      79     
+                      80     
+                      81     
+                      82     
+                      83     
+009C                  84     main:
+                      85     
+009C 7850             86     mov r0,#50H
+009E 1169             87     call readNibble
+00A0 08               88     inc r0;
+00A1 1169             89     call readNibble
+00A3 08               90     inc r0;
+00A4 1169             91     call readNibble
+00A6 08               92     inc r0;
+00A7 1169             93     call readNibble
+00A9 E550             94     mov a,50H;
+00AB 2551             95     add a,51H;
+                      96     
+00AD F556             97     mov 56H,a;
+                      98     
+00AF E552             99     mov a,52H
+00B1 3553            100     addc a,53h
+00B3 540F            101     anl a,#0Fh
+                     102     
+00B5 23              103     rl a
+00B6 23              104     rl a
+00B7 23              105     rl a
+00B8 23              106     rl a
+                     107     
+00B9 F557            108     mov 57H,a
+00BB 2556            109     add a,56H;
+                     110     
+                     111     
+00BD F4              112     cpl a
+00BE 04              113     inc a
+                     114     
+00BF F8              115     mov r0,a
+                     116     
+00C0 54F0            117     anl a,#0F0H
+00C2 F590            118     mov P1,a;
+                     119     
+00C4 120050          120     lcall delay
+00C7 120050          121     lcall delay
+                     122     
+00CA E8              123     mov a ,r0
+A51 MACRO ASSEMBLER  IN_LAB                                                               10/07/2019 12:49:29 PAGE     3
+
+00CB 540F            124     anl a,#0Fh
+00CD 23              125     rl a
+00CE 23              126     rl a
+00CF 23              127     rl a
+00D0 23              128     rl a
+00D1 F590            129     mov P1,a;
+                     130     
+00D3 80FE            131     here: sjmp here
+                     132     end
+A51 MACRO ASSEMBLER  IN_LAB                                                               10/07/2019 12:49:29 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   0056H   A   
+BACK1. . . . . . .  C ADDR   0054H   A   
+BACK3. . . . . . .  C ADDR   0052H   A   
+BACK4. . . . . . .  C ADDR   005CH   A   
+BACK5. . . . . . .  C ADDR   005EH   A   
+BACK6. . . . . . .  C ADDR   0060H   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+HERE . . . . . . .  C ADDR   00D3H   A   
+MAIN . . . . . . .  C ADDR   009CH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+READNIBBLE . . . .  C ADDR   0069H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,136 @@
+A51 MACRO ASSEMBLER  ADD_LED                                                              10/07/2019 12:40:48 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\add_led.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE add_led.asm SET(SMALL) DEBUG PRINT(.\Listings\add_led.lst) OBJECT(.\Obj
+                      ects\add_led.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+                       2             
+0000 02013B            3     ljmp main
+                       4     
+                       5     
+                       6     
+                       7     
+00D2                   8     org 0D2H
+                       9             
+00D2                  10     readNibble:
+00D2 75900F           11     mov P1, #0Fh; First configure P1.3-P1.0 as input
+                      12     
+00D5 7590FF           13     mov P1,#0ffh; Set pins P1.7-P1.4(LEDs) (indication that routine is ready to accept input)
+                      14     
+00D8 120122           15     lcall delay
+00DB 120122           16     lcall delay
+00DE 120122           17     lcall delay
+00E1 120122           18     lcall delay
+00E4 120122           19     lcall delay; wait for 5 sec during which user can give input
+00E7 C297             20     clr p1.7
+00E9 C296             21     clr p1.6
+00EB C295             22     clr p1.5
+00ED C294             23     clr p1.4; Clear pins P1.7-P1.4
+00EF 120122           24     lcall delay; wait for one sec
+                      25     ;mov @r0,p1
+00F2 E590             26     mov a,p1;
+                      27     ; read the input on P1.3-P1.0 (nibble)
+00F4 75F010           28     mov b,#16
+                      29     
+00F7 A4               30     MUL AB
+00F8 240F             31     add a,#0FH;
+                      32     
+00FA F590             33     mov p1,a
+                      34     
+                      35     
+                      36     
+00FC 120122           37     lcall delay
+00FF 120122           38     lcall delay
+0102 120122           39     lcall delay
+0105 120122           40     lcall delay
+0108 120122           41     lcall delay; show the read value on pins P1.7-P1.4(LEDs)
+                      42     ;wait for 5 sec
+                      43     
+                      44     ;The following code is to verify that the user input is right
+010B C297             45     clr p1.7
+010D C296             46     clr p1.6
+010F C295             47     clr p1.5
+0111 C294             48     clr p1.4
+0113 E590             49     mov a,p1; USER sets all switches if I/P is verified. (0FH )
+0115 B40FBA           50     cjne a,#0Fh,readNibble; Follow the above-mentioned procedure to accept a nibble
+0118 A690             51     mov @r0,p1
+                      52     ; If the nibble reads 0FH, USER input is verified.
+                      53     ; Else, User has to input the nibble again.
+011A 22               54     RET
+                      55     
+011B                  56     packNibbles:
+011B E54E             57     mov a,4Eh
+A51 MACRO ASSEMBLER  ADD_LED                                                              10/07/2019 12:40:48 PAGE     2
+
+011D 254F             58     add a,4fh
+011F F550             59     mov 50H,a; Combine the two nibbles and store the byte to 50H.
+0121 22               60     RET
+                      61     
+                      62     
+                      63     
+                      64     
+0122                  65     delay:
+0122 7B05             66                     mov R3,#5;
+                      67        
+0124                  68                     back3 :
+0124 7AC4             69                               mov R2,#196
+0126                  70                               BACK1 :
+0126 79FF             71                                         MOV R1,#0FFH
+0128                  72                                         BACK :
+0128 D9FE             73                                                  DJNZ R1,BACK
+012A DAFA             74                                         DJNZ R2, BACK1
+                      75                             
+012C 7C0C             76                               mov R4,#12;   
+012E                  77                               back4 :
+012E 7EC4             78                                             mov R6,#196
+0130                  79                                             BACK5 :
+0130 7FFF             80                                                       MOV R7,#0FFH
+0132                  81                                               BACK6 :
+0132 DFFE             82                                                        DJNZ R7,BACK6
+0134 DEFA             83                                                       DJNZ R6, BACK5
+0136 DCF6             84                                         DJNZ R4, back4
+0138 DBEA             85                               DJNZ R3, back3
+013A 22               86     ret
+                      87     
+                      88     
+                      89     
+                      90     
+                      91     
+013B                  92     main:
+013B 784E             93     mov r0,#4Eh
+013D 11D2             94     call readNibble; Read the MSB from the user and store in into locations 4EH
+013F 08               95     inc r0
+0140 11D2             96     call readNibble; Read the LSB from the user and store in into locations 4FH
+0142 311B             97     call packNibbles;
+                      98     end
+A51 MACRO ASSEMBLER  ADD_LED                                                              10/07/2019 12:40:48 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   0128H   A   
+BACK1. . . . . . .  C ADDR   0126H   A   
+BACK3. . . . . . .  C ADDR   0124H   A   
+BACK4. . . . . . .  C ADDR   012EH   A   
+BACK5. . . . . . .  C ADDR   0130H   A   
+BACK6. . . . . . .  C ADDR   0132H   A   
+DELAY. . . . . . .  C ADDR   0122H   A   
+MAIN . . . . . . .  C ADDR   013BH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PACKNIBBLES. . . .  C ADDR   011BH   A   
+READNIBBLE . . . .  C ADDR   00D2H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

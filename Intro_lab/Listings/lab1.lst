@@ -1,0 +1,51 @@
+A51 MACRO ASSEMBLER  LAB1                                                                 08/13/2019 13:33:22 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab1.asm SET(SMALL) DEBUG PRINT(.\Listings\lab1.lst) OBJECT(.\Objects\l
+                      ab1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     Org 0h
+0000 020100            2     ljmp main
+0100                   3     Org 100h
+                       4     
+0100                   5     main:
+0100 7A01              6         mov r2, #1 ; r2
+0102 A950              7             mov r1, 50H ;
+0104 7850              8             mov r0, #50H ;
+                       9             
+0106 E550             10             mov a, 50H;
+                      11             
+0108 6008             12             jz here;
+                      13             
+010A 7400             14             mov a, #0  ; clearing a
+                      15             
+010C                  16             loop:  
+010C 2A               17                             add a, r2;
+010D 0A               18                             inc r2; increamenting the no.
+010E 08               19                             inc r0; increamentiong the memory pointer
+010F F6               20                             mov @r0,a; storing the of a in memory location present in r0
+0110 D9FA             21                             djnz r1,loop ;
+                      22                             
+0112 80FE             23                             here : sjmp here;
+                      24     end;                    
+A51 MACRO ASSEMBLER  LAB1                                                                 08/13/2019 13:33:22 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0112H   A   
+LOOP . . . . . . .  C ADDR   010CH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

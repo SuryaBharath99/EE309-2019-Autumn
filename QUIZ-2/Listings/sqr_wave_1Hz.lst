@@ -1,0 +1,81 @@
+A51 MACRO ASSEMBLER  SQR_WAVE_1HZ                                                         10/13/2019 10:37:14 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\sqr_wave_1Hz.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE sqr_wave_1Hz.asm SET(SMALL) DEBUG PRINT(.\Listings\sqr_wave_1Hz.lst) OB
+                      JECT(.\Objects\sqr_wave_1Hz.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00H
+0000 020100            2     ljmp main1
+                       3     
+                       4     
+                       5     
+                       6     
+000B                   7     org 00Bh
+000B 020200            8     ljmp 200H
+                       9     
+                      10     
+                      11     
+0200                  12     org 200H
+0200 D805             13     djnz r0,loop1
+                      14     
+0202 B2B2             15     cpl p3.2
+0204 020100           16     ljmp main1
+                      17     
+0207                  18     loop1: 
+0207 020102           19     ljmp main 
+020A 22               20     ret
+                      21     
+020B 32               22     retI
+                      23     
+                      24     
+                      25     
+                      26     
+0100                  27     org 100h
+                      28     
+                      29     
+0100                  30     main1:
+0100 780F             31     mov r0,#0Fh
+                      32     
+0102                  33     main: 
+                      34     
+                      35     
+                      36     ;mov r1,#0FFh
+                      37     
+0102 758901           38     mov TMOD,#01H
+0105 758C01           39     mov TH0,#01H;
+0108 758A00           40     mov TL0,#00H
+010B D28C             41     setb TR0
+010D C28D             42     clr 8DH;
+010F 75A882           43     mov IE,#82H
+                      44     
+0112 80FE             45     sjmp $
+                      46     
+                      47     
+                      48     end
+A51 MACRO ASSEMBLER  SQR_WAVE_1HZ                                                         10/13/2019 10:37:14 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+LOOP1. . . . . . .  C ADDR   0207H   A   
+MAIN . . . . . . .  C ADDR   0102H   A   
+MAIN1. . . . . . .  C ADDR   0100H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

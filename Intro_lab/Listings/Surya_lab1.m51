@@ -1,0 +1,55 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    08/13/2019  13:33:49  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\Sample Code.obj TO .\Objects\Surya_lab1 PRINT (.\Listings\Surya_lab1.m51) RAMSIZE 
+>> (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Sample Code.obj (SAMPLE_CODE)
+
+
+LINK MAP OF MODULE:  .\Objects\Surya_lab1 (SAMPLE_CODE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0112H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Surya_lab1 (SAMPLE_CODE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SAMPLE_CODE
+  C:0110H         SYMBOL        HERE
+  C:010AH         SYMBOL        LOOP
+  C:0100H         SYMBOL        MAIN
+  C:0000H         LINE#         6
+  C:0100H         LINE#         11
+  C:0102H         LINE#         12
+  C:0104H         LINE#         13
+  C:0106H         LINE#         15
+  C:0108H         LINE#         20
+  C:010AH         LINE#         22
+  C:010BH         LINE#         23
+  C:010CH         LINE#         24
+  C:010DH         LINE#         25
+  C:010EH         LINE#         27
+  C:0110H         LINE#         31
+  -------         ENDMOD        SAMPLE_CODE
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0015H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=274
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

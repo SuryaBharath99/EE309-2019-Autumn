@@ -1,0 +1,122 @@
+A51 MACRO ASSEMBLER  PRIME                                                                09/11/2019 00:43:06 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\prime.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE prime.asm SET(SMALL) DEBUG PRINT(.\Listings\prime.lst) OBJECT(.\Objects
+                      \prime.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020020            2     LJMP MAIN
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+0020                   8     ORG 20H
+                       9             
+                      10             
+                      11             
+0020 AB50             12     main: mov r3, 50h
+0022 75F001           13               mov b,#1;
+0025 7851             14               mov r0,#51H
+0027 7A01             15               mov r2,#1
+                      16               
+0029 0A               17     loop:  inc r2
+002A 75F001           18                      mov b,#1       
+002D 12003E           19                      lcall primedetector
+                      20               
+                      21              
+0030 EB               22               mov a,r3;
+0031 C2D7             23               clr cy
+                      24               
+                      25               
+0033 9A               26               subb a,r2;
+0034 7400             27               mov a,#0;
+0036 3400             28               addc a,#0;
+                      29               
+                      30               
+0038 60EF             31               jz loop
+                      32               
+003A 7000             33               jnz here
+                      34               
+                      35               
+003C 80FE             36               here: sjmp here
+                      37               
+                      38             
+003E                  39     primedetector:      
+003E 05F0             40                                             inc b;
+0040 E5F0             41                                             mov a,b
+0042 FC               42                                             mov R4,a
+0043 EA               43                                             mov a,r2
+0044 C2D7             44                                             clr cy
+0046 95F0             45                                             subb a,b
+0048 600E             46                                             jz writing
+                      47                                             
+004A EA               48                                             mov a,r2;
+004B 84               49                                             div ab
+004C E5F0             50                                             mov a,b
+004E F9               51                                             mov R1,a
+                      52                                             
+004F EC               53                                             mov a,R4
+0050 F5F0             54                                             mov b,a
+                      55                                             
+0052 E9               56                                             mov a,R1
+0053 70E9             57                                             jnz primedetector
+A51 MACRO ASSEMBLER  PRIME                                                                09/11/2019 00:43:06 PAGE     2
+
+                      58                                             
+                      59                                             
+0055 60D2             60                                             jz loop
+                      61                                             
+                      62                                             
+                      63                                             ;mov R5,a
+                      64                                             
+                      65                                             ;mov a,R2
+                      66                                             
+                      67                                             ;subb a,b 
+                      68                                             ;jz  writing
+                      69                                             
+                      70                                             ;mov a,R5
+                      71                                             
+                      72                                             ;jnz primedetector
+                      73                                             
+                      74                      
+0057 22               75                                             ret
+                      76     
+                      77     
+0058                  78     writing:
+0058 08               79                     inc r0;
+0059 EA               80                     mov a,R2;
+005A F6               81                     mov @r0,a;
+005B E5F0             82                     mov a,b
+005D 60CA             83                     jz loop
+005F 22               84                     ret
+                      85     
+                      86     
+                      87               
+                      88                     
+                      89     end     
+A51 MACRO ASSEMBLER  PRIME                                                                09/11/2019 00:43:06 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+HERE . . . . . . .  C ADDR   003CH   A   
+LOOP . . . . . . .  C ADDR   0029H   A   
+MAIN . . . . . . .  C ADDR   0020H   A   
+PRIMEDETECTOR. . .  C ADDR   003EH   A   
+WRITING. . . . . .  C ADDR   0058H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

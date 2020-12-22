@@ -1,0 +1,3 @@
+".\Objects\Sample Code.obj" 
+TO ".\Objects\Surya_lab1" 
+PRINT(".\Listings\Surya_lab1.m51") RAMSIZE(256) 

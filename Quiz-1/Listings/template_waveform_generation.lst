@@ -1,0 +1,83 @@
+A51 MACRO ASSEMBLER  TEMPLATE_WAVEFORM_GENERATION                                         09/06/2019 23:09:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\template_waveform_generation.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Quiz1\template_waveform_generation.asm SET(SMALL) DEBUG PRINT(.\Listing
+                      s\template_waveform_generation.lst) OBJECT(.\Objects\template_waveform_generation.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020109            2     LJMP MAIN
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+0100                   8     ORG 0100H
+                       9     
+                      10     ;this subroutine generates delay of 50-60 ms
+0100                  11     DELAY:
+                      12             ;-- write appropriate delay code
+                      13             
+                      14             
+0100 7AC8             15     MOV R2,#200
+0102                  16     BACK1:
+0102 79FF             17     MOV R1,#0FFH
+0104                  18     BACK :
+0104 D9FE             19     DJNZ R1, BACK
+0106 DAFA             20     DJNZ R2, BACK1
+                      21             
+0108 22               22             RET
+                      23     
+                      24     
+                      25     
+                      26     
+                      27     
+0109                  28     MAIN:
+0109 7400             29                     mov a,#0;
+010B 7B32             30                     mov r3,#50
+010D 7C05             31                     mov r4,#5
+010F 7DFA             32                     mov r5,#250
+                      33                     ;-- initialize appropriately
+0111 F590             34             loop:   mov p1,a;-- write out waveform magnitude onto the PORT P1
+0113 120100           35                     lcall delay;-- call delay subroutine
+                      36                     
+                      37                     
+0116 2B               38                     add a,r3;-- increment or decrement magnitude as required
+0117 DCF8             39                     djnz r4, loop
+0119 7C05             40                     mov r4,#5;      
+011B C2D7             41                     clr cy
+011D 9B               42                     subb a,r3
+011E 9B               43                     loop1:  subb a,r3
+011F F590             44                                     mov p1,a
+0121 120100           45                                     lcall delay;-- call delay subroutine
+                      46                                     
+                      47                                     
+0124 70F8             48                             jnz  loop1 ;-- logic to continue with the waveform
+0126 60E9             49                     jz loop  ;-- LJMP loop
+                      50             
+                      51             END
+A51 MACRO ASSEMBLER  TEMPLATE_WAVEFORM_GENERATION                                         09/06/2019 23:09:20 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   0104H   A   
+BACK1. . . . . . .  C ADDR   0102H   A   
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+DELAY. . . . . . .  C ADDR   0100H   A   
+LOOP . . . . . . .  C ADDR   0111H   A   
+LOOP1. . . . . . .  C ADDR   011EH   A   
+MAIN . . . . . . .  C ADDR   0109H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

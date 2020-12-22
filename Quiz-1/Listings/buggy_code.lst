@@ -1,0 +1,50 @@
+A51 MACRO ASSEMBLER  BUGGY_CODE                                                           09/06/2019 22:19:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\buggy_code.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Quiz1\buggy_code.asm SET(SMALL) DEBUG PRINT(.\Listings\buggy_code.lst) 
+                      OBJECT(.\Objects\buggy_code.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+0000                   2     org 0H
+0000 020100            3     ljmp main
+                       4     
+0100                   5     org 100H
+0100                   6     main:
+0100 7A01              7         mov r2, #1          
+0102 7950              8         mov r1, #50H         
+0104 A851              9         mov r0, 51H 
+0106 AB50             10         mov r3, 50H 
+                      11                     
+                      12                      
+                      13         
+0108 EA               14     loop:   mov a, r2            
+0109 8AF0             15             mov b, r2               
+010B A4               16             mul ab
+010C F6               17             mov @r0,a
+010D 08               18             inc r0
+010E 0A               19             inc r2
+010F DBF7             20             djnz r3, loop
+0111 80FE             21         here : sjmp here        
+                      22     end
+A51 MACRO ASSEMBLER  BUGGY_CODE                                                           09/06/2019 22:19:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   0111H   A   
+LOOP . . . . . . .  C ADDR   0108H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
