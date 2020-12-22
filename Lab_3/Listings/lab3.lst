@@ -1,0 +1,216 @@
+A51 MACRO ASSEMBLER  LAB3                                                                 08/27/2019 16:10:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab3.asm SET(SMALL) DEBUG PRINT(.\Listings\lab3.lst) OBJECT(.\Objects\l
+                      ab3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+                       2     ;-- code memory location 00h
+0000 020003            3     LJMP MAIN
+                       4     
+                       5     ;ORG 50H
+                       6             
+0003 A850              7     main:  mov r0, 50H;
+0005 A951              8                mov r1, 51H;
+                       9                
+0007 19               10                dec r1;
+0008 7700             11                mov @r1,#00H;
+000A 19               12                dec r1
+000B 7700             13                     mov @r1, #00H;
+000D 09               14                     inc r1
+000E 09               15                     inc r1
+000F 09               16                     inc r1
+0010 09               17                     inc r1
+0011 09               18                     inc r1
+0012 7700             19                     mov @r1,#00H
+0014 09               20                     inc r1
+0015 7700             21                     mov @r1, #00H
+                      22                     
+0017 E9               23                     mov a ,r1;
+                      24                     
+0018 9406             25                     subb a,#06H;
+001A F9               26                     mov r1,a;
+                      27               
+001B AA52             28                     mov r2, 52H;
+001D 7D05             29                     mov r5,#05H;
+001F                  30     loop:
+                      31        
+                      32              
+001F E6               33          mov a,@r0
+0020 09               34              inc r1
+0021 09               35              inc r1
+0022 87F0             36              mov b,@r1
+                      37              
+0024 A4               38              mul AB
+                      39              
+                      40              
+                      41              using 0
+0025 C000             42              push ar0         
+0027 8A90             43              mov 90H,r2;
+0029 A890             44              mov r0,90H;
+                      45                             
+002B A6F0             46              mov @r0,B;
+002D 08               47              inc r0
+002E F6               48              mov @r0,A;
+                      49              using 0
+002F D000             50              pop ar0
+                      51              
+                      52     
+                      53              
+                      54              
+                      55     ;-----------------------------1  
+                      56              
+                      57              
+A51 MACRO ASSEMBLER  LAB3                                                                 08/27/2019 16:10:53 PAGE     2
+
+0031 08               58              inc r0;
+0032 19               59              dec r1;
+0033 E6               60              mov a,@r0
+0034 87F0             61              mov b,@r1
+                      62              
+                      63              
+0036 A4               64              mul AB
+                      65              
+                      66              
+                      67              
+                      68              using 0
+0037 C000             69              push ar0         
+0039 8AA0             70              mov 0A0H,r2;
+003B A8A0             71              mov r0,0A0H;
+                      72              
+003D 08               73              inc r0;
+                      74              
+003E 26               75              add A,@r0;
+                      76              
+003F F6               77              mov @r0,a;
+                      78              
+0040 18               79              dec r0;
+                      80              
+0041 E5F0             81              mov a,b;
+                      82              
+0043 36               83              addc a,@r0;
+0044 F6               84              mov @r0,a;
+                      85              using 0
+0045 D000             86              pop ar0
+                      87              
+                      88     ;-------------------------2      
+0047 08               89              inc r0;
+0048 19               90              dec r1;
+0049 E6               91              mov a,@r0
+004A 87F0             92              mov b,@r1
+                      93              
+                      94              
+004C A4               95              mul AB
+                      96              
+                      97              
+                      98              
+                      99              using 0
+004D C000            100              push ar0         
+004F 8AA0            101              mov 0A0H,r2;
+0051 A8A0            102              mov r0,0A0H;
+                     103              
+0053 08              104              inc r0;
+                     105              
+0054 26              106              add A,@r0;
+                     107              
+0055 F6              108              mov @r0,a;
+                     109              
+0056 18              110              dec r0;
+                     111              
+0057 E5F0            112              mov a,b;
+                     113              
+0059 36              114              addc a,@r0;
+005A F6              115              mov @r0,a;
+                     116              using 0
+005B D000            117              pop ar0
+                     118              
+                     119              
+005D 0A              120              inc r2;
+005E 0A              121              inc r2
+005F 09              122              inc r1
+0060 18              123              dec r0
+A51 MACRO ASSEMBLER  LAB3                                                                 08/27/2019 16:10:53 PAGE     3
+
+0061 18              124              dec r0
+                     125              
+0062 DDBB            126     djnz r5,loop     
+                     127              
+0064 8A90            128              mov 90H,r2
+0066 A890            129              mov r0,90H;
+0068 08              130              inc r0
+0069 E6              131              mov a, @r0;
+006A F590            132              mov P1,a
+                     133                     
+                     134              
+                     135              
+006C 80FE            136              here: sjmp here         
+                     137              
+                     138              
+                     139              
+                     140              
+                     141              
+                     142              
+                     143              
+                     144              
+                     145              
+                     146              
+                     147              
+                     148              
+                     149              
+                     150              
+                     151              
+                     152              
+                     153              
+                     154              
+                     155         
+                     156        
+                     157               
+                     158                     
+                     159     
+                     160                     
+                     161                     
+                     162                     
+                     163                     
+                     164                ;mov r2, @r0;
+                     165                 ;inc r0
+                     166                     ;mov r3, @r0;
+                     167                     ;inc r0
+                     168                     ;mov r4, @r0;
+                     169                     ;mov r5, @r1;
+                     170                     ;inc r1
+                     171                     ;mov r6, @r1;
+                     172                     ;inc r1
+                     173                     ;;mov r7, @r1;
+                     174                     ;mov r1, 52H;
+                     175                     
+                     176                     
+                     177                     
+                     178                     ;mov a,r3;
+                     179                     ;mov b,r4; 
+                     180     
+                     181     end
+                                             
+A51 MACRO ASSEMBLER  LAB3                                                                 08/27/2019 16:10:53 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AR0. . . . . . . .  D ADDR   0000H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+HERE . . . . . . .  C ADDR   006CH   A   
+LOOP . . . . . . .  C ADDR   001FH   A   
+MAIN . . . . . . .  C ADDR   0003H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

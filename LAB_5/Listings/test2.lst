@@ -1,0 +1,163 @@
+A51 MACRO ASSEMBLER  TEST2                                                                10/12/2019 22:30:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\test2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE test2.asm SET(SMALL) DEBUG PRINT(.\Listings\test2.lst) OBJECT(.\Objects
+                      \test2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00H
+0000 02005B            2     ljmp main
+                       3     
+                       4     
+                       5     
+0003                   6     asciihigh:
+                       7     
+                       8     
+0003 E550              9     mov a, 50H
+0005 FE               10     mov R6,a
+0006 54F0             11     anl a,#0F0H
+0008 03               12     rr a
+0009 03               13     rr a
+000A 03               14     rr a
+000B 03               15     rr a
+                      16     
+                      17     
+                      18     
+000C FF               19             mov R7,a;
+000D 740A             20                     mov a,#0Ah;
+                      21                     
+000F 75D000           22                     mov psw,#00H
+                      23                     
+0012 9F               24                     SUBB a,R7;
+0013 7400             25                     mov a,#00H;
+0015 3400             26                     addc a,#00H; 
+                      27                     
+0017 B40002           28                     cjne a,#00h,first
+001A 600D             29                     jz second
+                      30     
+001C EE               31     first: mov a,R6
+001D 54F0             32                                     anl a,#0f0h
+001F 03               33                                     rr a
+0020 03               34                                     rr a
+0021 03               35                                     rr a
+0022 03               36                                     rr a
+                      37                                     
+0023 2437             38                                     add a,#37H;
+                      39                                     
+0025 F553             40                                     mov 53H,a;
+                      41                                     
+0027 800B             42                                     sjmp here2
+                      43                                     
+                      44                                     
+0029 EE               45                     second:  mov a,R6
+002A 54F0             46                                     anl a,#0f0h
+002C 03               47                                     rr a
+002D 03               48                                     rr a
+002E 03               49                                     rr a
+002F 03               50                                     rr a
+                      51                                     
+0030 2430             52                                     add a,#30H
+                      53                                     
+0032 F553             54                                     mov 53H,a;
+                      55     
+                      56     
+0034 22               57     here2: ret
+A51 MACRO ASSEMBLER  TEST2                                                                10/12/2019 22:30:46 PAGE     2
+
+                      58     
+                      59     
+                      60     
+                      61     
+0035                  62     asciilow:
+                      63     
+0035 E550             64     mov a, 50H
+0037 FC               65     mov R4,a
+0038 540F             66     anl a,#0FH
+                      67     ;rr a
+                      68     ;rr a
+                      69     ;rr a
+                      70     ;rr a
+                      71     
+                      72     
+                      73     
+003A FD               74             mov R5,a;
+003B 7409             75                     mov a,#09h;
+                      76                     
+003D 75D000           77                     mov psw,#00H
+                      78                     
+0040 9D               79                     SUBB a,R5;
+0041 7400             80                     mov a,#00H;
+0043 3400             81                     addc a,#00H; 
+                      82                     
+0045 B40002           83                     cjne a,#00h,first1
+0048 6009             84                     jz second1
+                      85     
+004A EC               86     first1: mov a,R4
+004B 540F             87                                     anl a,#00Fh
+                      88                                     ;rr a
+                      89                                     ;rr a
+                      90                                     ;rr a
+                      91                                     ;rr a
+                      92                                     
+004D 2437             93                                     add a,#37H;
+                      94                                     
+004F F554             95                                     mov 54H,a;
+                      96                                     
+0051 8007             97                                     sjmp here3
+                      98                                     
+                      99                                     
+0053 EC              100                     second1:  mov a,R4
+0054 540F            101                                     anl a,#0fh
+                     102                                     ;rr a
+                     103                                     ;rr a
+                     104                             ;       rr a
+                     105                             ;       rr a
+                     106                                     
+0056 2430            107                                     add a,#30H
+                     108                                     
+0058 F554            109                                     mov 54H,a;
+                     110     
+                     111     
+005A 22              112     here3: ret
+                     113     
+                     114     
+                     115     
+005B                 116     main:
+                     117     
+005B 75500A          118             mov 50H,#0AH;
+005E 1103            119             acall asciihigh
+0060 1135            120             acall asciilow  
+                     121             
+0062 80FE            122             here99: sjmp here99     
+                     123     
+A51 MACRO ASSEMBLER  TEST2                                                                10/12/2019 22:30:46 PAGE     3
+
+                     124     end
+A51 MACRO ASSEMBLER  TEST2                                                                10/12/2019 22:30:46 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ASCIIHIGH. . . . .  C ADDR   0003H   A   
+ASCIILOW . . . . .  C ADDR   0035H   A   
+FIRST. . . . . . .  C ADDR   001CH   A   
+FIRST1 . . . . . .  C ADDR   004AH   A   
+HERE2. . . . . . .  C ADDR   0034H   A   
+HERE3. . . . . . .  C ADDR   005AH   A   
+HERE99 . . . . . .  C ADDR   0062H   A   
+MAIN . . . . . . .  C ADDR   005BH   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SECOND . . . . . .  C ADDR   0029H   A   
+SECOND1. . . . . .  C ADDR   0053H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

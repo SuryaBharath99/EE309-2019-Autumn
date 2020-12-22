@@ -1,0 +1,3 @@
+".\Objects\led.obj" 
+TO ".\Objects\HomeWork" 
+PRINT(".\Listings\HomeWork.m51") RAMSIZE(256) 

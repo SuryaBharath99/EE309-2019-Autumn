@@ -1,0 +1,114 @@
+A51 MACRO ASSEMBLER  LED                                                                  08/30/2019 21:59:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\led.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE led.asm SET(SMALL) DEBUG PRINT(.\Listings\led.lst) OBJECT(.\Objects\led
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+  0090                 2                     LED EQU P1
+                       3                             
+0000                   4             ORG 00H 
+0000 020071            5             LJMP MAIN
+                       6             
+                       7     ;-----------------------------------------------------
+                       8      
+0050                   9      org 50H
+                      10              
+0050 E8               11     delay : mov a,R0
+0051 FB               12                     mov R3,a;
+0052 740F             13                     mov a,#0Fh;
+0054 5B               14                     ANL a,R3;
+0055 75F001           15                     mov B,#01H;
+0058 84               16                     DIV AB;
+0059 FB               17                     mov R3,a;
+                      18                     
+005A                  19                     back3 :
+005A 7A62             20                               mov R2,#98
+005C                  21                               BACK1 :
+005C 79FF             22                                         MOV R1,#0FFH
+005E                  23                                         BACK :
+005E D9FE             24                                                  DJNZ R1,BACK
+0060 DAFA             25                                         DJNZ R2, BACK1
+                      26                             
+0062 7C08             27                               mov R4,#8;    
+0064                  28                               back4 :
+0064 7E62             29                                             mov R6,#98
+0066                  30                                             BACK5 :
+0066 7FFF             31                                                       MOV R7,#0FFH
+0068                  32                                               BACK6 :
+0068 DFFE             33                                                        DJNZ R7,BACK6
+006A DEFA             34                                                       DJNZ R6, BACK5
+006C DCF6             35                                         DJNZ R4, back4
+006E DBEA             36                               DJNZ R3, back3
+0070 22               37     ret
+                      38              
+0071                  39     MAIN:
+0071 A890             40                     mov R0,LED;
+0073 740F             41                     mov a,#0Fh;
+0075 58               42                     ANL a,R0;
+0076 F8               43                     mov R0,a;
+                      44                     
+                      45                     
+                      46                     
+                      47                     
+0077 759000           48                     loopS:  mov LED,#0H;
+007A 120050           49                                     LCALL delay;
+007D 759020           50                                     mov LED,#020H;
+0080 120050           51                                     LCALL delay;
+0083 759040           52                                     mov LED,#040H;
+0086 120050           53                                     LCALL delay;
+0089 759060           54                                     mov LED,#060H;
+008C 120050           55                                     LCALL delay;
+008F 759080           56                                     mov LED,#080H;
+0092 120050           57                                     LCALL delay;
+A51 MACRO ASSEMBLER  LED                                                                  08/30/2019 21:59:46 PAGE     2
+
+0095 7590A0           58                                     mov LED,#0A0H;
+0098 120050           59                                     LCALL delay;
+009B 7590C0           60                                     mov LED,#0C0H;
+009E 120050           61                                     LCALL delay;
+00A1 7590E0           62                                     mov LED,#0E0H;
+00A4 120050           63                                     LCALL delay;
+                      64                                     
+00A7 80CE             65                                     sjmp  loopS;
+                      66                                     
+                      67                     
+                      68                     ;mov A,#01H
+                      69                     ;mov R5,#01H
+                      70                     ;BACK2 :
+                      71                                     
+                      72                     ;               LCALL delay
+                      73                     ;               xrl a,R5
+                      74                     ;               sjmp BACK2
+                      75     end     
+                                     
+A51 MACRO ASSEMBLER  LED                                                                  08/30/2019 21:59:46 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   005EH   A   
+BACK1. . . . . . .  C ADDR   005CH   A   
+BACK3. . . . . . .  C ADDR   005AH   A   
+BACK4. . . . . . .  C ADDR   0064H   A   
+BACK5. . . . . . .  C ADDR   0066H   A   
+BACK6. . . . . . .  C ADDR   0068H   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+LED. . . . . . . .  D ADDR   0090H   A   
+LOOPS. . . . . . .  C ADDR   0077H   A   
+MAIN . . . . . . .  C ADDR   0071H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
