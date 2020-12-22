@@ -1,0 +1,198 @@
+A51 MACRO ASSEMBLER  IN_LAB_1                                                             08/19/2019 19:53:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\In_lab_1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE In_lab_1.asm SET(SMALL) DEBUG PRINT(.\Listings\In_lab_1.lst) OBJECT(.\O
+                      bjects\In_lab_1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+0000 020084            2     ljmp main
+                       3     
+                       4     
+                       5      
+                       6      
+0003                   7     zeroOut : 
+0003 7600              8             loop1 : mov @r0,#0;
+0005 08                9                       inc r0;
+0006 DAFB             10                       djnz r2 ,loop1  
+0008 22               11       ret             
+                      12     
+                      13     
+0009                  14     display : 
+0009 E6               15     loop2 : mov a,@r0;
+000A 23               16                 RL a;
+000B 23               17                 RL a;
+000C 23               18                 rl a;
+000D 23               19                 rl a;
+000E F590             20                 mov P1,a;
+0010 08               21                 inc r0;
+0011 7D14             22                 mov R5,#20;
+0013                  23                 back2 :
+0013 7CC4             24                                     mov R4,#196
+0015                  25                                             BACK1 :
+0015 7BFF             26                                                     MOV R3,#0FFH
+0017                  27                                                     BACK :
+0017 DBFE             28                                                             DJNZ R3,BACK
+0019 DCFA             29                                                     DJNZ R4, BACK1
+001B DDF6             30                     djnz R5,back2
+                      31                   
+001D DAEA             32                djnz r2, loop2;
+                      33     
+001F 22               34     ret
+                      35     
+                      36      
+0020                  37     bin2ascii_checksumbyte :
+0020 26               38                     loop :  add a,@r0;
+0021 08               39                                     inc r0;
+0022 DAFC             40                                     djnz r2 , loop;
+0024 F4               41                     cpl a;
+0025 2401             42                     add a,#01H;
+0027 08               43                     inc r0;
+0028 F6               44                     mov @r0,a;
+                      45                     
+0029 FE               46                     mov R6,a;
+                      47                     
+002A 54F0             48                     anl a,#0f0h
+002C 03               49                     rr a
+002D 03               50                     rr a
+002E 03               51                     rr a
+002F 03               52                     rr a
+                      53                     
+0030 FF               54                     mov R7,a;
+0031 740A             55                     mov a,#0Ah;
+                      56                     
+0033 75D000           57                     mov psw,#00H
+A51 MACRO ASSEMBLER  IN_LAB_1                                                             08/19/2019 19:53:19 PAGE     2
+
+                      58                     
+0036 9F               59                     SUBB a,R7;
+0037 7400             60                     mov a,#00H;
+0039 3400             61                     addc a,#00H; 
+                      62                     
+003B B40002           63                     cjne a,#00h,first
+003E 600D             64                     jz second
+                      65                     
+0040 EE               66                     first : mov a,R6
+0041 54F0             67                                     anl a,#0f0h
+0043 03               68                                     rr a
+0044 03               69                                     rr a
+0045 03               70                                     rr a
+0046 03               71                                     rr a
+                      72                                     
+0047 2437             73                                     add a,#37H;
+0049 09               74                                     inc r1
+004A F7               75                                     mov @r1,a;
+                      76                                     
+004B 800B             77                                     sjmp here2
+                      78                                     
+                      79                                     
+004D EE               80                     second :  mov a,R6
+004E 54F0             81                                     anl a,#0f0h
+0050 03               82                                     rr a
+0051 03               83                                     rr a
+0052 03               84                                     rr a
+0053 03               85                                     rr a
+                      86                                     
+0054 2430             87                                     add a,#30H
+0056 09               88                                     inc r1;
+0057 F7               89                                     mov @r1,a;
+                      90                                     
+                      91             
+                      92                                     
+0058 EE               93     here2 : mov a,R6;
+0059 540F             94                     anl a,#0Fh;
+005B FE               95                     mov R6,a;
+005C FF               96                     mov R7,a;
+005D 740A             97                     mov a,#0Ah;
+                      98                     
+005F 75D000           99                     mov psw,#00H
+                     100                     
+0062 9F              101                     SUBB a,R7;
+0063 7400            102                     mov a,#00H;
+0065 3400            103                     addc a,#00H; 
+                     104                     
+0067 B40002          105                     cjne a,#00h,third
+006A 6009            106                     jz fourth
+                     107     
+                     108     
+006C EE              109             third : mov a,R6
+006D 540F            110                                     anl a,#0fh
+                     111                                     
+006F 2437            112                                     add a,#37H;
+0071 09              113                                     inc r1
+0072 F7              114                                     mov @r1,a;
+0073 8007            115                                     sjmp here1;
+                     116                     
+0075 EE              117                     fourth :mov a,R6
+0076 540F            118                                     anl a,#0fh
+                     119                                     
+0078 2430            120                                     add a,#30H
+007A 09              121                                     inc r1;
+007B F7              122                                     mov @r1,a;
+                     123     
+A51 MACRO ASSEMBLER  IN_LAB_1                                                             08/19/2019 19:53:19 PAGE     3
+
+007C 22              124     here1 : ret             
+                     125                     
+                     126                     
+007D                 127     memcpy : 
+007D E6              128                     mov a,@r0;
+007E F7              129                     mov @r1,a;
+007F 08              130                     inc r0;
+0080 09              131                     inc r1;
+                     132                     
+0081 DAFA            133                     djnz r2, memcpy
+0083 22              134     ret             
+                     135             
+                     136     
+                     137                      
+                     138     
+0084                 139     main:
+0084 AA50            140             mov r2,50H;
+0086 A851            141     mov r0,51H;
+0088 A952            142     mov r1,52H;
+                     143             ;ACALL zeroOut
+                     144             ;ACALL display
+008A 1120            145             ACALL bin2ascii_checksumbyte
+                     146             ;ACALL memcpy
+008C 80FE            147             HERE :SJMP HERE
+                     148             
+                     149     END     
+                                     
+A51 MACRO ASSEMBLER  IN_LAB_1                                                             08/19/2019 19:53:19 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                 T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . . . .  C ADDR   0017H   A   
+BACK1. . . . . . . . .  C ADDR   0015H   A   
+BACK2. . . . . . . . .  C ADDR   0013H   A   
+BIN2ASCII_CHECKSUMBYTE  C ADDR   0020H   A   
+DISPLAY. . . . . . . .  C ADDR   0009H   A   
+FIRST. . . . . . . . .  C ADDR   0040H   A   
+FOURTH . . . . . . . .  C ADDR   0075H   A   
+HERE . . . . . . . . .  C ADDR   008CH   A   
+HERE1. . . . . . . . .  C ADDR   007CH   A   
+HERE2. . . . . . . . .  C ADDR   0058H   A   
+LOOP . . . . . . . . .  C ADDR   0020H   A   
+LOOP1. . . . . . . . .  C ADDR   0003H   A   
+LOOP2. . . . . . . . .  C ADDR   0009H   A   
+MAIN . . . . . . . . .  C ADDR   0084H   A   
+MEMCPY . . . . . . . .  C ADDR   007DH   A   
+P1 . . . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . . . .  D ADDR   00D0H   A   
+SECOND . . . . . . . .  C ADDR   004DH   A   
+THIRD. . . . . . . . .  C ADDR   006CH   A   
+ZEROOUT. . . . . . . .  C ADDR   0003H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

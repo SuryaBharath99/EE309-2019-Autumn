@@ -1,0 +1,90 @@
+A51 MACRO ASSEMBLER  HW2                                                                  09/07/2019 01:55:15 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\HW2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE HW2.asm SET(SMALL) DEBUG PRINT(.\Listings\HW2.lst) OBJECT(.\Objects\HW2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+  0090                 3             LED EQU P1
+                       4     
+0000                   5             ORG 00  
+0000 020069            6             LJMP MAIN
+                       7     
+                       8     
+                       9     ;----------------------------------------------------------------
+0050                  10             ORG 50H
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18     
+0050 AB4F             19     delay : mov R3,4FH;
+                      20        
+0052                  21                     back3 :
+0052 7AC4             22                               mov R2,#196
+0054                  23                               BACK1 :
+0054 79FF             24                                         MOV R1,#0FFH
+0056                  25                                         BACK :
+0056 D9FE             26                                                  DJNZ R1,BACK
+0058 DAFA             27                                         DJNZ R2, BACK1
+                      28                             
+005A 7C0C             29                               mov R4,#12;   
+005C                  30                               back4 :
+005C 7EC4             31                                             mov R6,#196
+005E                  32                                             BACK5 :
+005E 7FFF             33                                                       MOV R7,#0FFH
+0060                  34                                               BACK6 :
+0060 DFFE             35                                                        DJNZ R7,BACK6
+0062 DEFA             36                                                       DJNZ R6, BACK5
+0064 DCF6             37                                         DJNZ R4, back4
+0066 DBEA             38                               DJNZ R3, back3
+0068 22               39     ret
+                      40     
+                      41     
+                      42     ;----------------------------------------------------------------------
+                      43     
+0069                  44     MAIN:
+                      45                     
+                      46                     
+0069 759000           47                     mov LED,#00H
+006C 7401             48                     mov A,#01H
+006E 7D01             49                     mov R5,#01H
+0070                  50                     BACK2 :
+0070 F590             51                                     mov LED,a
+0072 120050           52                                     LCALL delay
+0075 6D               53                                     xrl a,R5
+0076 80F8             54                                     sjmp BACK2
+                      55     end                             
+A51 MACRO ASSEMBLER  HW2                                                                  09/07/2019 01:55:15 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   0056H   A   
+BACK1. . . . . . .  C ADDR   0054H   A   
+BACK2. . . . . . .  C ADDR   0070H   A   
+BACK3. . . . . . .  C ADDR   0052H   A   
+BACK4. . . . . . .  C ADDR   005CH   A   
+BACK5. . . . . . .  C ADDR   005EH   A   
+BACK6. . . . . . .  C ADDR   0060H   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+LED. . . . . . . .  D ADDR   0090H   A   
+MAIN . . . . . . .  C ADDR   0069H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
