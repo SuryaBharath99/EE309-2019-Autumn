@@ -1,0 +1,206 @@
+A51 MACRO ASSEMBLER  TEST1                                                                09/24/2019 20:30:51 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\test1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE test1.asm SET(SMALL) DEBUG PRINT(.\Listings\test1.lst) OBJECT(.\Objects
+                      \test1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 7580FF            2     mov p0, #0FFh
+                       3     
+0003 D2B2              4     setb p3.2
+0005 02000D            5     ljmp main
+                       6     
+                       7     
+0008 B2B2              8     loop: cpl p3.2
+000A 02000D            9                     ljmp main
+                      10     
+                      11     
+                      12     
+000D                  13     main: 
+                      14     ;acall delay
+                      15     
+                      16     
+000D E580             17     mov a,p0
+                      18     
+                      19     
+000F 5407             20     anl a,#07H
+0011 2402             21     add a,#02H
+0013 FD               22     mov r5,a
+0014 F4               23     cpl a
+0015 2401             24     add a,#01h
+0017 75F006           25     mov b,#06h
+001A A4               26     MUL AB
+001B F8               27     mov r0,a
+001C 740A             28     mov a,#0Ah
+001E C2D7             29     clr cy
+0020 9D               30     subb a,r5
+0021 F4               31     cpl a
+0022 2401             32     add a,#01h
+0024 75F006           33     mov b,#06h
+0027 A4               34     MUL AB
+0028 F9               35     mov r1,a
+                      36     
+                      37     
+                      38     
+                      39     ;  timer
+                      40     
+                      41     
+                      42     
+0029 E8               43     loop5: mov a,r0
+002A F58C             44     mov th0,a
+                      45     ;mov a,r1
+002C F58A             46     mov tl0,a
+                      47     
+                      48     
+                      49     
+002E D28C             50     setb TR0
+                      51     
+                      52     
+                      53     
+0030 308D1A           54     loop4: jnb tf0,loop9
+                      55     
+                      56             
+0033 C28D             57                     clr tf0
+A51 MACRO ASSEMBLER  TEST1                                                                09/24/2019 20:30:51 PAGE     2
+
+0035 C28C             58                     clr tr0
+0037 B2B2             59                     cpl p3.2
+                      60                     
+0039 E9               61      mov a,r1
+003A F58C             62     mov th0,a
+                      63     ;mov a,r1
+003C F58A             64     mov tl0,a
+                      65     
+                      66     
+                      67     
+003E D28C             68     setb TR0
+                      69     
+                      70     
+                      71     
+0040 308D18           72     loop6: jnb tf0,loop10
+                      73     
+                      74     
+                      75             
+0043 C28D             76                     clr tf0
+0045 C28C             77                     clr tr0
+0047 B2B2             78                     cpl p3.2
+                      79     
+0049 80DE             80             sjmp loop5
+                      81     
+                      82     
+                      83     
+                      84     
+                      85     
+                      86     
+                      87     
+                      88     
+                      89     
+004B 80FE             90     here1:sjmp here1
+                      91     
+004D E580             92     loop9:          mov a,p0
+                      93     
+                      94     
+004F 5407             95     anl a,#07H
+0051 2402             96     add a,#02H
+0053 C2D7             97         clr cy
+0055 9D               98             subb a,r5
+0056 B400B4           99             cjne a,#00, main
+0059 80D5            100             sjmp loop4
+                     101             
+                     102             
+005B E580            103     loop10:mov a,p0
+                     104     
+                     105     
+005D 5407            106     anl a,#07H
+005F 2402            107     add a,#02H
+0061 C2D7            108         clr cy
+0063 9D              109             subb a,r5
+0064 B400A6          110             cjne a,#00, main
+0067 80D7            111             sjmp loop6      
+                     112             
+                     113     
+                     114     
+0069                 115     delay:
+                     116     
+0069 C003            117             push 3
+006B C002            118                     push 2
+006D C001            119                     push 1
+006F C004            120                     push 4
+0071 C006            121                     push 6
+0073 C007            122                     push 7
+0075 7B05            123                     mov R3,#5;
+A51 MACRO ASSEMBLER  TEST1                                                                09/24/2019 20:30:51 PAGE     3
+
+                     124        
+0077                 125                     back3 :
+0077 7AC4            126                               mov R2,#196
+0079                 127                               BACK1 :
+0079 79FF            128                                         MOV R1,#0FFH
+007B                 129                                         BACK :
+007B D9FE            130                                                  DJNZ R1,BACK
+007D DAFA            131                                         DJNZ R2, BACK1
+                     132                             
+007F 7C0C            133                               mov R4,#12;   
+0081                 134                               back4 :
+0081 7EC4            135                                             mov R6,#196
+0083                 136                                             BACK5 :
+0083 7FFF            137                                                       MOV R7,#0FFH
+0085                 138                                               BACK6 :
+0085 DFFE            139                                                        DJNZ R7,BACK6
+0087 DEFA            140                                                       DJNZ R6, BACK5
+0089 DCF6            141                                         DJNZ R4, back4
+008B DBEA            142                               DJNZ R3, back3
+                     143     
+008D D007            144                     pop 7
+008F D006            145                     pop 6 
+0091 D004            146                     pop 4 
+0093 D001            147                     pop 1
+0095 D002            148                     pop 2
+0097 D003            149                     pop 3
+0099 22              150     ret
+                     151     
+                     152     
+                     153     
+                     154     end
+                             
+A51 MACRO ASSEMBLER  TEST1                                                                09/24/2019 20:30:51 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   007BH   A   
+BACK1. . . . . . .  C ADDR   0079H   A   
+BACK3. . . . . . .  C ADDR   0077H   A   
+BACK4. . . . . . .  C ADDR   0081H   A   
+BACK5. . . . . . .  C ADDR   0083H   A   
+BACK6. . . . . . .  C ADDR   0085H   A   
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+DELAY. . . . . . .  C ADDR   0069H   A   
+HERE1. . . . . . .  C ADDR   004BH   A   
+LOOP . . . . . . .  C ADDR   0008H   A   
+LOOP10 . . . . . .  C ADDR   005BH   A   
+LOOP4. . . . . . .  C ADDR   0030H   A   
+LOOP5. . . . . . .  C ADDR   0029H   A   
+LOOP6. . . . . . .  C ADDR   0040H   A   
+LOOP9. . . . . . .  C ADDR   004DH   A   
+MAIN . . . . . . .  C ADDR   000DH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

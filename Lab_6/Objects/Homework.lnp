@@ -1,0 +1,3 @@
+".\Objects\test_interrupt.obj" 
+TO ".\Objects\Homework" 
+PRINT(".\Listings\Homework.m51") RAMSIZE(256) 

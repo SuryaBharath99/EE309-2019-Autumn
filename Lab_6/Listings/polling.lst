@@ -1,0 +1,57 @@
+A51 MACRO ASSEMBLER  POLLING                                                              09/23/2019 13:03:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\polling.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE polling.asm SET(SMALL) DEBUG PRINT(.\Listings\polling.lst) OBJECT(.\Obj
+                      ects\polling.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 C2B2              2     clr p3.2
+0002 02000A            3     ljmp main
+                       4     
+                       5     
+0005 B2B2              6     loop: cpl p3.2
+0007 02000A            7                     ljmp main
+                       8     
+                       9     
+                      10     
+000A                  11     main: 
+000A 785F             12     mov r0,#5FH
+000C                  13     loop1:
+000C 758A00           14     mov 8AH,#00h
+000F 758A00           15     mov 8AH,#00h
+0012 758901           16     mov 89H,#01H 
+                      17     
+0015 D28C             18     setb 08CH
+0017 208D00           19     jb 8Dh ,loop2
+001A                  20     loop2:
+001A D8F0             21     djnz r0,loop1;
+001C 020005           22     ljmp loop
+                      23     
+001F 80FE             24     here:sjmp here
+                      25     
+                      26     
+                      27     end
+A51 MACRO ASSEMBLER  POLLING                                                              09/23/2019 13:03:19 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   001FH   A   
+LOOP . . . . . . .  C ADDR   0005H   A   
+LOOP1. . . . . . .  C ADDR   000CH   A   
+LOOP2. . . . . . .  C ADDR   001AH   A   
+MAIN . . . . . . .  C ADDR   000AH   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

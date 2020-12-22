@@ -1,0 +1,43 @@
+A51 MACRO ASSEMBLER  TEST_INTERRUPT                                                       10/13/2019 00:09:15 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\test_interrupt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE test_interrupt.asm SET(SMALL) DEBUG PRINT(.\Listings\test_interrupt.lst
+                      ) OBJECT(.\Objects\test_interrupt.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00H
+0000 020100            2     ljmp main
+000B                   3     org 00Bh
+000B B2B2              4     cpl p3.2
+000D 32                5     retI
+                       6     
+0100                   7     org 100h
+0100 758902            8     main: mov TMOD,#02H
+0103 758CCE            9     mov TH0,#-50;
+0106 D28C             10     setb TR0
+0108 75A882           11     mov IE,#82H
+010B 80FE             12     sjmp $
+                      13     end
+A51 MACRO ASSEMBLER  TEST_INTERRUPT                                                       10/13/2019 00:09:15 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+IE . . . . . . . .  D ADDR   00A8H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

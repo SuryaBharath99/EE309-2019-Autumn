@@ -1,0 +1,88 @@
+A51 MACRO ASSEMBLER  INTERRUPT                                                            10/12/2019 23:51:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\interrupt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE interrupt.asm SET(SMALL) DEBUG PRINT(.\Listings\interrupt.lst) OBJECT(.
+                      \Objects\interrupt.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+                       2             
+0000 C2B2              3     clr p3.2
+0002 020100            4     ljmp main
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+0100                  10     org 100H
+0100                  11     main: 
+0100 D2AF             12     setb IE.7
+0102 D2A9             13     setb IE.1
+0104 786F             14     mov r0,#6FH
+                      15     
+                      16     
+                      17     
+                      18     
+0106 758A00           19     mov 8AH,#00h;TL0
+0109 758C00           20     mov 8CH,#00h; TH0
+010C 758901           21     mov 89H,#01H ; timer 0 in mode 1
+010F D28C             22     setb 8CH
+                      23     ;here2:sjmp here2
+                      24     
+                      25     
+                      26     
+0111 80FE             27     here:sjmp here
+                      28     
+                      29     
+000B                  30     org 000BH
+000B 020200           31     ljmp 200h
+                      32     
+0200                  33     org 200H
+                      34             
+0200 C28D             35     clr 8Dh
+0202 02020A           36     ljmp loop2
+                      37             
+0205 B2B2             38     loop: cpl p3.2
+0207 020100           39                     ljmp main
+                      40                     
+                      41     
+020A                  42     loop2:
+020A D802             43     djnz r0,loop4;
+020C 5105             44     acall loop
+                      45     
+                      46     
+020E                  47     loop4:
+020E 758A00           48     mov 8AH,#00h;TL0
+0211 758C00           49     mov 8CH,#00h; TH0
+0214 758901           50     mov 89H,#01H ; timer 0 in mode 1
+0217 D28C             51     setb 8CH
+0219 80FE             52     here66: sjmp here66
+                      53     
+                      54     
+                      55     
+                      56     end
+A51 MACRO ASSEMBLER  INTERRUPT                                                            10/12/2019 23:51:57 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0111H   A   
+HERE66 . . . . . .  C ADDR   0219H   A   
+IE . . . . . . . .  D ADDR   00A8H   A   
+LOOP . . . . . . .  C ADDR   0205H   A   
+LOOP2. . . . . . .  C ADDR   020AH   A   
+LOOP4. . . . . . .  C ADDR   020EH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
