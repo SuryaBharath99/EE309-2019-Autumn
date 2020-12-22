@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\Homework.obj" 
+TO ".\Objects\homework" 
+PRINT(".\Listings\homework.m51") RAMSIZE(256) 

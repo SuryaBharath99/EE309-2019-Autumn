@@ -1,0 +1,103 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              11/01/2019 01:04:53 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          /*
+   2          EE337 lab7: DAC IC tlv5616 interfacinng with pt-51
+   3          L.W.: (1) Complete spi() function from spi.h and dac() function from tlv5616.h so that this projecct will 
+             -work properly 
+   4                (2) Check whether it is working or not
+   5                (3) Edit adc() function to make it genralized.
+   6          */
+   7          
+   8          #include <at89c5131.h>
+   9          #include "lcd.h"                                  //Driver for interfacing lcd 
+  10          #include "tlv1543.h"                                //Driver for interfacing ADC ic tlv1543
+  11          #include "tlv5616.h"                                //Driver for interfacinf DAC ic tlv56516
+  12          #include "filters.h"                                //Includes processing functions for filters
+  13          
+  14          
+  15          void main(void)
+  16          {
+  17   1        unsigned int adc_data=0,dac_data=0;
+  18   1        unsigned int i = 0;
+  19   1      
+  20   1        spi_init();                                       //AT89C5131A SPI initialization
+  21   1        adc_init();                                       //ADC IC (Here tlv1543) initialization
+  22   1        dac_init();                                       //DAC IC (Here tlv5616) initialization
+  23   1        
+  24   1        //lcd_init();                                     //LCD initialization
+  25   1        
+  26   1        //Q1: Interface DAC and fill following while loop to generate Ramp waveform mantioned in a handout.
+  27   1            
+  28   1        //  while(1)
+  29   1        //    {
+  30   1              
+  31   1              
+  32   1            //  dac(adc());
+  33   1              //dac(0x07ff);                                //Send 16 bit word to DAC IC, Here output voltage 1.65 V      
+  34   1            
+  35   1              
+  36   1              //RAMP_WAVEFORM
+  37   1              //i = 0;
+  38   1              
+  39   1            //  while(i < 4096){
+  40   1              //  i = i+1;
+  41   1                //dac(i);
+  42   1                //msdelay(1);
+  43   1                //msdelay(4);
+  44   1                //msdelay(4);
+  45   1                //msdelay(2);
+  46   1                //}
+  47   1              
+  48   1            //  while(i>0){
+  49   1            //  i = i-1;
+  50   1              //dac(i);
+  51   1          //  msdelay(1);
+  52   1                //msdelay(4);
+  53   1              //  msdelay(4);
+C51 COMPILER V9.60.0.0   MAIN                                                              11/01/2019 01:04:53 PAGE 2   
+
+  54   1              //  msdelay(2);
+  55   1              //} 
+  56   1              
+  57   1            //}
+  58   1          
+  59   1        //Comment above while loop for Q2--------------------------------
+  60   1        
+  61   1        //Q2 : ADC and DAC  Q3: Moving average filter. (Uncomment following while loop for activating moving aver
+             -age filter program )
+  62   1        
+  63   1        while(1)
+  64   1        {
+  65   2          adc_data=adc(0);                                  //Recieve sampled data from ADC IC
+  66   2          
+  67   2          dac_data= adc_data<<2;                          //Approximating 10 bit ADC value to 12 bit value for dac
+  68   2          
+  69   2        dac_data = moving_avg(dac_data);                //Moving avg filter
+  70   2          dac(dac_data);                                  //Send 16 bit word to DAC IC
+  71   2          //dac(0x0fff);
+  72   2        }
+  73   1      
+  74   1      }
+  75          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    602    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     25      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,59 @@
+A51 MACRO ASSEMBLER  SAMPLE_CODE                                                          08/12/2019 21:21:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Sample Code.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\Sample Code.asm SET(SMALL) DEBUG PRINT(.\Listings\Sample Code.lst) O
+                      BJECT(.\Objects\Sample Code.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;assembely is case insensitive language
+                       2     ;Do modular coding
+                       3     ;Give proper Indentation
+                       4     
+0000                   5     org 0H
+0000 020100            6     ljmp main  ; a label with name main
+                       7     ;as after 00h some locations are  there for interrupt ISR 
+                       8     
+0100                   9     org 100H
+0100                  10     main:
+0100 7A01             11         mov r2, #1          ; r2 store the no.
+0102 A950             12         mov r1, 50H         ; reading the value of N
+0104 7850             13         mov r0, #50H        ; storing the 50h in register r0
+                      14                             ; used as a memory pointer
+0106 E550             15         mov a, 50H          ; moving content of location 50 h in accumulator
+                      16                             ; i.e. reading value of N
+0108 6008             17         jz here             ; checking whether N is zero or not
+                      18                             ; if N is zero then no need to do partial sum
+                      19                             ; else need to do partial sum
+010A 7400             20         mov a, #0           ; clearing the accumulator  
+                      21     
+010C 2A               22         loop:   add a, r2       ; adding accumulator and register r2 content 
+010D 0A               23                 inc r2          ; incrementing the no.
+010E 08               24                 inc r0          ; incrementing the memory pointer
+010F F6               25                 mov @r0, a      ; storing the content of accumulator in memory 
+                      26                                 ; location equal to  the content of register r0
+0110 D9FA             27                 djnz r1, loop   ; decrementing the content of r1 and checking whether it is 
+                      28                                 ; zero or not
+                      29                                 ; if zero then stop the code
+                      30                                 ; else repeat
+0112 80FE             31         here : sjmp here        ; infinite loop like while(1)
+                      32     end
+A51 MACRO ASSEMBLER  SAMPLE_CODE                                                          08/12/2019 21:21:32 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0112H   A   
+LOOP . . . . . . .  C ADDR   010CH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

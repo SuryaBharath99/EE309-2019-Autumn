@@ -1,0 +1,42 @@
+A51 MACRO ASSEMBLER  PART1                                                                08/13/2019 16:49:44 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\part1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE part1.asm SET(SMALL) DEBUG PRINT(.\Listings\part1.lst) OBJECT(.\Objects
+                      \part1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0H
+0000 020100            2     ljmp main  ; a label with name main
+                       3     ;as after 00h some locations are  there for interrupt ISR 
+                       4     
+0100                   5     org 100H
+                       6     
+0100                   7     main:
+0100 E550              8             mov a, 50H;
+0102 A960              9             mov r1, 60H;
+0104 29               10             add a, r1;
+0105 F570             11             mov 70H,a;
+0107 7400             12             mov a,#0H;
+0109 3400             13             addc a,#0H;
+010B F571             14             mov 71H,a;
+010D 80FE             15             here : sjmp here;
+                      16     end     
+A51 MACRO ASSEMBLER  PART1                                                                08/13/2019 16:49:44 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   010DH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
